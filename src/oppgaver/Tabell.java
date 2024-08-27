@@ -173,4 +173,61 @@ public class Tabell {
         return new int[] {nm,m};    // nm i posisjon 0, m i posisjon 1
 
     } // nestMaks
+    public static void boblesortering1(int[] a)     // hører til klassen Tabell
+    {
+        long tid = 0;
+        tid = System.currentTimeMillis();
+        for (int n = a.length; n > 1; n--)           // n reduseres med 1 hver gang
+        {
+            for (int i = 1; i < n; i++)                // går fra 1 til n
+            {
+                if (a[i - 1] > a[i]) bytt(a, i - 1, i);  // sammenligner/bytter
+            }
+        }
+        tid = System.currentTimeMillis() - tid;
+        System.out.println(Arrays.toString(a) + " og det tok " + tid + " millisekunder.");
+    }
+    public static void boblesortering2(int[] a)
+    {
+        long tid = 0;
+        tid = System.currentTimeMillis();
+        for (int n = a.length; n > 1; )            // n er intervallgrense
+        {
+            int byttindeks = 0;                      // hjelpevariabel
+            for (int i = 1; i < n; i++)              // går fra 1 til n
+            {
+                if (a[i - 1] > a[i])                   // sammenligner
+                {
+                    bytt(a, i - 1, i);                   // bytter
+                    byttindeks = i;                      // høyre indeks i ombyttingen
+                }
+            }
+            n = byttindeks;                          // ny intervallgrense
+        }
+        tid = System.currentTimeMillis() - tid;
+        System.out.println(Arrays.toString(a) + " og det tok " + tid + " millisekunder.");
+    }
+    public static int lineærsøk(int[] a, int verdi) // legges i class Tabell
+    {
+        if (a.length == 0 || verdi > a[a.length-1])
+            return -(a.length + 1);  // verdi er større enn den største
+
+        int i = 0; for( ; a[i] < verdi; i++);  // siste verdi er vaktpost
+
+        return verdi == a[i] ? i : -(i + 1);   // sjekker innholdet i a[i]; Returnerer plasseringen til verdien.
+    }
+
+    //Lag metoden public static int lineærsøk(int[] a, int fra, int til, int verdi). Den skal søke i intervallet a[fra:til>. Sjekk først at intervallet er lovlig.
+
+    public static int lineærsøk(int [] a, int fra, int til, int verdi){ //1.3.5 Oppgave 4
+        if (fra < 0 || til > a.length || fra >= til || verdi > a[a.length-1]) return -(a.length + 1);
+
+        for(int i = fra; a[i] <= verdi || i < til; i++){
+            if (a[i] == verdi){
+                return i;
+            }
+        }  // siste verdi er vaktpost
+
+        return -verdi;
+    }
 }
