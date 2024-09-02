@@ -27,7 +27,7 @@ public class Program
         //System.out.println();
         //Tabell.boblesortering2(a);
 
-        System.out.println(Tabell.lineærsøk(a, 0, 14, 6));              // utskrift: 10
-
+        //System.out.println(Tabell.lineærsøk(a, 0, 14, 6));              // utskrift: 10
+        //System.out.println(Tabell.quickSort(a));
     }
 } // class Program

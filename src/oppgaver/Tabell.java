@@ -83,7 +83,7 @@ public class Tabell {
         return min(a,0,a.length);     // kaller metoden over
     }
 
-    public static char[] bytt(char[] c, int i, int j){
+   /* public static char[] bytt(char[] c, int i, int j){
         if (i < 0 || j > c.length || i >= j) {
             throw new IllegalArgumentException("Illegalt intervall!");
         }
@@ -94,7 +94,7 @@ public class Tabell {
             c[j] = bokstav2;
         }
         return c;
-    }
+    }*/
 
     public static int[] nestMaks(int[] a) // ny versjon
     {
@@ -230,4 +230,25 @@ public class Tabell {
 
         return -verdi;
     }
+
+    public static void quickSort(int [] tabell){
+        quickSort(tabell, 0, tabell.length-1);
+    }
+    public static void quickSort(int [] tabell, int fra, int til){
+        if(fra >= til) return;
+
+        bytt(tabell, til, fra + (til - fra)/2); //Hvorfor ikke (fra+til)/2? Fordi du kan få overflow hvis f.eks. fra og til er over halvparten av maks int.
+        int pivot = tabell[til];
+        int v = fra, h = til-1;
+        while (true){
+            while(tabell[v] < pivot && v <= h) v++;
+            while (tabell[h] >= pivot && v <= h) h--;
+            if (v>=h) break; //Hvis pivot elementet har kun mindre eller lik på venstre og kun større til høyre.
+            bytt(tabell, v++, h--);
+        }
+        bytt(tabell, til, v);
+        quickSort(tabell, fra, v-1);
+        quickSort(tabell, v+1, til);
+    }
+    //Implimenter mergesort :))
 }
